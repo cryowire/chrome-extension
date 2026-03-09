@@ -2,10 +2,10 @@
  * Content script for github.com.
  *
  * Detects cooldown.yaml blob pages and shows a floating button
- * that opens the cryo-wiring viewer site with the raw URL.
+ * that opens the cryowire viewer site with the raw URL.
  */
 
-const VIEWER_BASE = "https://cryo-wiring.github.io/viewer/";
+const VIEWER_BASE = "https://cryowire.github.io/viewer/";
 const COOLDOWN_PATTERN = /\/blob\/[^/]+\/.*cooldown\.ya?ml$/;
 
 function isCooldownBlobPage(): boolean {
@@ -25,7 +25,7 @@ function getRawUrl(): string | null {
 
 function createViewerButton(rawUrl: string): HTMLElement {
   const btn = document.createElement("button");
-  btn.id = "cryo-wiring-viewer-btn";
+  btn.id = "cryowire-viewer-btn";
   btn.type = "button";
   btn.style.cssText = `
     position: fixed;
@@ -54,7 +54,7 @@ function createViewerButton(rawUrl: string): HTMLElement {
       <circle cx="12" cy="12" r="10"/>
       <path d="M12 6v6l4 2"/>
     </svg>
-    <span>Open in Cryo-Wiring Viewer</span>
+    <span>Open in Cryowire Viewer</span>
   `;
 
   btn.addEventListener("mouseenter", () => {
@@ -75,7 +75,7 @@ function createViewerButton(rawUrl: string): HTMLElement {
 }
 
 function tryInject() {
-  document.getElementById("cryo-wiring-viewer-btn")?.remove();
+  document.getElementById("cryowire-viewer-btn")?.remove();
 
   if (!isCooldownBlobPage()) return;
 
